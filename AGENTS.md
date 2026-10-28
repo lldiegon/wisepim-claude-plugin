@@ -16,7 +16,6 @@ Before handing off a change, run:
 
 ```sh
 python3 -m unittest discover -s tests -v
-python3 scripts/validate.py
 python3 scripts/build.py
 python3 scripts/validate.py --installable
 claude plugin validate ./plugin

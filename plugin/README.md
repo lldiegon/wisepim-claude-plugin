@@ -77,7 +77,6 @@ Clone the skills repository beside this one, commit its reviewed changes, then:
 
 ```sh
 python3 scripts/sync_skills.py --source ../wisepim-skills
-python3 scripts/validate.py
 python3 -m unittest discover -s tests -v
 python3 scripts/build.py
 python3 scripts/validate.py --installable
