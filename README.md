@@ -7,7 +7,7 @@ channel requirements you supply, then review proposed changes in WisePIM before
 anything is applied.
 
 The plugin connects to your authorized WisePIM project and combines a remote MCP
-connection with three reusable skills maintained in the
+connection with sixteen reusable skills maintained in the
 [public WisePIM skills repository](https://github.com/lldiegon/wisepim-skills).
 
 ## Release status
@@ -32,6 +32,17 @@ Examples: “Audit these ten products for missing descriptions”; “Prepare Du
 translations for these products”; “Check these products against these channel
 requirements.” Start with an explicit project and product selection.
 
+
+## Catalog workflows
+
+Sixteen bundled skills cover catalog quality, product web research, research-backed native enrichment, translation, bulk text cleanup, commerce analysis, selected-product SEO evidence and opportunity planning, supplier documents, images, taxonomy, prompts/settings, channel issues and native improvement jobs. The [canonical skill library](https://github.com/lldiegon/wisepim-skills) describes each workflow.
+
+Research is evidence-only and requires its own execution permission. Findings do not automatically replace catalog fields or images. Stored supplier documents use supported bounded extraction; unsupported PDF/OCR and new file imports remain in their native workflows. Supplier jobs operate on already imported rows. Analytics reads persisted source evidence and reports mapping/coverage limits; it does not refresh providers or establish causal uplift.
+
+Discover native job schemas and get a planning-only estimate before preparing a job. A catalog-job budget is an admission estimate ceiling, not a hard final-spend cap. Native job field policies and review gates remain authoritative after launch; the plugin does not expose arbitrary automation, bypass a gate or publish products. Track actual task/run receipts and reread saved products before claiming completion.
+
+The expanded package uses explicit catalog, quality, task, settings, prompts and analytics reads; reviewed catalog/settings/prompt writes; and enrichment, research and catalog-job execution. Existing grants do not gain new scopes automatically. Reconnect and consent only to the operations needed for your account and workflows.
+
 ## Connect and use
 
 Install through the directory after approval, or test a local checkout with:
@@ -46,10 +57,7 @@ setup uses **Use your own OAuth client**; a server-side client registration with
 the exact Claude callback is required. Automatic client registration is not
 currently implemented. There is no API key to paste into this package.
 
-Invoke a skill by name or describe your task. The skills are
-`catalog-quality-audit`, `prepare-product-translations`, and
-`channel-readiness-review`. Availability depends on the installed Claude surface
-and your account and connector permissions.
+Invoke a skill by name or describe your task. Availability depends on the installed Claude surface, deployed service and your account and connector permissions.
 
 ## Changes and approval
 

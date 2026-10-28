@@ -9,7 +9,24 @@ import struct
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_SKILLS = {"catalog-quality-audit", "prepare-product-translations", "channel-readiness-review"}
+EXPECTED_SKILLS = {
+    'analyze-commerce-performance',
+    'assess-product-images',
+    'catalog-quality-audit',
+    'channel-readiness-review',
+    'clean-catalog-data',
+    'enrich-from-research',
+    'enrich-from-supplier-documents',
+    'enrich-product-content',
+    'manage-enrichment-prompts',
+    'optimize-seo-performance',
+    'organize-product-taxonomy',
+    'prepare-product-translations',
+    'prioritize-catalog-opportunities',
+    'remediate-channel-issues',
+    'research-product-facts',
+    'run-catalog-improvement-jobs',
+}
 
 
 def payload_names(root):

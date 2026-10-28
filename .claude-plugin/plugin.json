@@ -1,7 +1,7 @@
 {
   "name": "wisepim",
-  "version": "0.1.1",
-  "description": "Product information management (PIM) for Claude: audit catalog quality, prepare product data enrichment and translations, and review channel requirements with human approval in WisePIM.",
+  "version": "0.2.0",
+  "description": "Product information management for Claude: research product facts, enrich and translate content, analyze catalog opportunities, and prepare reviewed native improvement jobs in WISEPIM.",
   "author": {
     "name": "WisePIM",
     "url": "https://wisepim.com"
