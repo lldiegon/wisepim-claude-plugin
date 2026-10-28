@@ -11,7 +11,26 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_SKILLS = {"catalog-quality-audit", "prepare-product-translations", "channel-readiness-review"}
 
 
+def contained_file(root, name):
+    """Reject symlinked files and parents before opening distributable content."""
+    base = root.resolve()
+    path = base / name
+    if not path.resolve().is_relative_to(base):
+        raise ValueError(f"Package path escapes its root: {name}")
+    if not path.is_file():
+        raise ValueError(f"Package file is missing: {name}")
+    current = path
+    while current != base:
+        if current.is_symlink():
+            raise ValueError(f"Package path contains a symlink: {name}")
+        current = current.parent
+    return path
+
+
 def validate(root=ROOT, preview=False):
+    root = root.resolve()
+    for name in (".claude-plugin/plugin.json", ".mcp.json", "README.md", "LICENSE", "skills.lock.json"):
+        contained_file(root, name)
     manifest = json.loads((root / ".claude-plugin/plugin.json").read_text())
     if manifest.get("name") != "wisepim" or not re.fullmatch(r"\d+\.\d+\.\d+", manifest.get("version", "")):
         raise ValueError("Expected wisepim identity and explicit semantic version")
@@ -41,6 +60,7 @@ def validate(root=ROOT, preview=False):
         if not path.is_file():
             continue
         name = path.relative_to(root).as_posix()
+        contained_file(root, name)
         actual[name] = hashlib.sha256(path.read_bytes()).hexdigest()
         if path.name == "SKILL.md":
             skill = path.parent.name

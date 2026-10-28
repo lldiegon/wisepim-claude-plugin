@@ -2,7 +2,7 @@
 
 from pathlib import Path
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from validate import ROOT, validate
+from validate import ROOT, contained_file, validate
 
 
 def build(root=ROOT):
@@ -15,9 +15,7 @@ def build(root=ROOT):
     destination.parent.mkdir(exist_ok=True)
     with ZipFile(destination, "w", compression=ZIP_DEFLATED) as archive:
         for name in sorted(names):
-            source = root / name
-            if source.is_symlink():
-                raise ValueError(f"Refusing symlink: {name}")
+            source = contained_file(root, name)
             info = ZipInfo(name, (2026, 1, 1, 0, 0, 0))
             info.compress_type = ZIP_DEFLATED
             info.external_attr = 0o100644 << 16

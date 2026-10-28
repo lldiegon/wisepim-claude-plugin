@@ -52,7 +52,8 @@ def collect(source):
 
 def sync(source, destination=ROOT, allow_uncommitted=False):
     source = source.resolve()
-    if source == destination.resolve() or source in destination.resolve().parents:
+    destination = destination.resolve()
+    if source == destination or source in destination.parents or destination in source.parents:
         raise ValueError("Source and destination must be separate repositories")
     # Read and validate everything before replacing any generated copy.
     payload = collect(source)

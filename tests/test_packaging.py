@@ -95,6 +95,33 @@ class PackagingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "not present verbatim"):
             sync(self.source, self.destination)
 
+    def test_overlapping_repositories_never_replace_canonical_source(self):
+        nested = self.destination / "skills" / "canonical"
+        shutil.copytree(self.source, nested)
+        original = {p.relative_to(nested): p.read_bytes() for p in nested.rglob("*") if p.is_file()}
+        for source, destination in ((nested, self.destination), (self.source, self.source), (self.base, self.destination)):
+            with self.subTest(source=source, destination=destination):
+                with self.assertRaisesRegex(ValueError, "separate repositories"):
+                    sync(source, destination, allow_uncommitted=True)
+        self.assertEqual(original, {p.relative_to(nested): p.read_bytes() for p in nested.rglob("*") if p.is_file()})
+
+    def test_symlinked_manifest_parent_is_rejected(self):
+        self.commit_source()
+        sync(self.source, self.destination)
+        outside = self.base / "external-manifest"
+        shutil.move(str(self.destination / ".claude-plugin"), outside)
+        (self.destination / ".claude-plugin").symlink_to(outside, target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, "escapes its root|symlink"):
+            validate(self.destination)
+
+    def test_internal_manifest_parent_symlink_is_rejected(self):
+        self.commit_source()
+        sync(self.source, self.destination)
+        shutil.move(str(self.destination / ".claude-plugin"), self.destination / "hidden-manifest")
+        (self.destination / ".claude-plugin").symlink_to("hidden-manifest", target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, "symlink"):
+            validate(self.destination)
+
     def test_mcp_headers_or_destination_changes_refused(self):
         self.commit_source()
         sync(self.source, self.destination)
