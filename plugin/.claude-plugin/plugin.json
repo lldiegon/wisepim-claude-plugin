@@ -1,9 +1,9 @@
 {
   "name": "wisepim",
-  "version": "0.2.0",
-  "description": "Product information management for Claude: research product facts, enrich and translate content, analyze catalog opportunities, and prepare reviewed native improvement jobs in WISEPIM.",
+  "version": "0.2.1",
+  "description": "Get started with WISEPIM, research product facts, enrich and translate content, analyze performance, and prepare reviewed catalog jobs.",
   "author": {
-    "name": "WisePIM",
+    "name": "WISEPIM",
     "url": "https://wisepim.com"
   },
   "homepage": "https://wisepim.com",

@@ -1,4 +1,4 @@
-"""Validate package structure and source integrity without contacting WisePIM."""
+"""Validate package structure and source integrity without contacting WISEPIM."""
 
 import argparse
 import hashlib
@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_SKILLS = {
+    'start-with-wisepim',
     'analyze-commerce-performance',
     'assess-product-images',
     'catalog-quality-audit',
@@ -106,7 +107,7 @@ def validate(root=ROOT, preview=False, check_installable=True):
         raise ValueError("Directory icon must be square, 512 to 2048 pixels, and below 2 MB")
     config = json.loads((root / ".mcp.json").read_text())
     if set(config) != {"mcpServers"} or set(config["mcpServers"]) != {"wisepim"}:
-        raise ValueError("Exactly one declared WisePIM destination is allowed")
+        raise ValueError("Exactly one declared WISEPIM destination is allowed")
     server = config["mcpServers"]["wisepim"]
     if set(server) != {"type", "url"} or server["type"] != "http":
         raise ValueError("Remote OAuth-only HTTP transport required; no embedded headers or local execution")

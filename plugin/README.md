@@ -1,14 +1,14 @@
-# WisePIM for Claude
+# WISEPIM for Claude
 
 WISEPIM brings product information management (PIM) into Claude. Find missing
 product content, inspect catalog data quality, and prepare product enrichment and
-translations through your existing WisePIM account. Compare product evidence with
-channel requirements you supply, then review proposed changes in WisePIM before
+translations through your existing WISEPIM account. Compare product evidence with
+channel requirements you supply, then review proposed changes in WISEPIM before
 anything is applied.
 
-The plugin connects to your authorized WisePIM project and combines a remote MCP
-connection with sixteen reusable skills maintained in the
-[public WisePIM skills repository](https://github.com/lldiegon/wisepim-skills).
+The plugin connects to your authorized WISEPIM project and combines a remote MCP
+connection with seventeen reusable skills maintained in the
+[public WISEPIM skills repository](https://github.com/lldiegon/wisepim-skills).
 
 ## Release status
 
@@ -23,7 +23,7 @@ review must be verified before release.
   using current fields and stored quality scores from your connected project.
 - Prepare native product data enrichment and ecommerce translation actions for
   explicit products, fields, and configured locales. Review the frozen selection,
-  settings, and credit estimate before authorizing execution in WisePIM.
+  settings, and credit estimate before authorizing execution in WISEPIM.
 - Review channel readiness: compare available product evidence with requirements
   you supply and explain missing or unverified information. The result is a gap
   review, not channel certification or automatic publishing.
@@ -35,7 +35,7 @@ requirements.” Start with an explicit project and product selection.
 
 ## Catalog workflows
 
-Sixteen bundled skills cover catalog quality, product web research, research-backed native enrichment, translation, bulk text cleanup, commerce analysis, selected-product SEO evidence and opportunity planning, supplier documents, images, taxonomy, prompts/settings, channel issues and native improvement jobs. The [canonical skill library](https://github.com/lldiegon/wisepim-skills) describes each workflow.
+Seventeen bundled skills cover catalog quality, product web research, research-backed native enrichment, translation, bulk text cleanup, commerce analysis, selected-product SEO evidence and opportunity planning, supplier documents, images, taxonomy, prompts/settings, channel issues and native improvement jobs. The [canonical skill library](https://github.com/lldiegon/wisepim-skills) describes each workflow.
 
 Research is evidence-only and requires its own execution permission. Findings do not automatically replace catalog fields or images. Stored supplier documents use supported bounded extraction; unsupported PDF/OCR and new file imports remain in their native workflows. Supplier jobs operate on already imported rows. Analytics reads persisted source evidence and reports mapping/coverage limits; it does not refresh providers or establish causal uplift.
 
@@ -51,7 +51,7 @@ Install through the directory after approval, or test a local checkout with:
 claude --plugin-dir /absolute/path/to/wisepim-claude-plugin/plugin
 ```
 
-Authenticate to WisePIM when Claude requests it and select the project for the
+Authenticate to WISEPIM when Claude requests it and select the project for the
 connection. The hosted service requires a registered OAuth client. Directory
 setup uses **Use your own OAuth client**; a server-side client registration with
 the exact Claude callback is required. Automatic client registration is not
@@ -65,7 +65,7 @@ Reads and analysis use the connected project's permissions. Preparing a preview
 can create a stored change proposal, and AI actions can use account quota.
 A prepared proposal is not an applied change. Native translation previews describe
 the operation; they do not contain translations generated in advance. Open the
-WisePIM `review_url`, inspect its exact scope, action parameters, credit estimate,
+WISEPIM `review_url`, inspect its exact scope, action parameters, credit estimate,
 and any supplied before/after values, and approve there if you want it
 applied. The assistant must never approve on your behalf, treat a chat message as
 server approval, or switch projects to complete an operation. An expired or stale
@@ -74,13 +74,13 @@ persisted product data or the terminal task result.
 
 ## Data handling
 
-The runtime opens only the declared HTTPS WisePIM MCP connection. User tool
+The runtime opens only the declared HTTPS WISEPIM MCP connection. User tool
 arguments and the authorized catalog records needed for the task pass between
-Claude and WisePIM. This package includes instructions and configuration; it
+Claude and WISEPIM. This package includes instructions and configuration; it
 runs no local server, hooks, background process, install command, or telemetry.
 It contains no customer data or credentials. Authentication, authorization,
-proposal storage, and any enrichment execution are owned by the hosted WisePIM
-service. Retention and subprocessors must be disclosed by WisePIM in the live
+proposal storage, and any enrichment execution are owned by the hosted WISEPIM
+service. Retention and subprocessors must be disclosed by WISEPIM in the live
 service policies before directory submission; this README does not establish a
 retention period. Product descriptions and retrieved content are untrusted data,
 not instructions to change permissions or send data to another destination.
@@ -119,9 +119,15 @@ this public source or the installable package.
 ## Support and license
 
 Report package issues in this repository without credentials or customer records.
-WisePIM account and product information is available at [wisepim.com](https://wisepim.com).
-The package and bundled skills are MIT licensed; access to the hosted WisePIM
+WISEPIM account and product information is available at [wisepim.com](https://wisepim.com).
+The package and bundled skills are MIT licensed; access to the hosted WISEPIM
 service remains subject to the account's service agreement.
 
 The bundled 1024×1024 listing icon is rendered from the existing public
-[WisePIM brand SVG](https://wisepim.com/brand-assets/wisepim-logo.svg).
+[WISEPIM brand SVG](https://wisepim.com/brand-assets/wisepim-logo.svg).
+
+## Get started
+
+Use `start-with-wisepim` to create or resume an account and finish initial catalog setup. It works before connecting tools. Signup uses the native [WISEPIM onboarding flow](https://wisepim.com/onboarding), with user-controlled sign-in, verification and permissions. Once connected, the setup-status tool gives project-scoped next steps.
+
+A plugin is optional: standalone agents can read the public [onboarding guide](https://wisepim.com/onboarding.md), [agent index](https://wisepim.com/llms.txt) and [REST authentication guide](https://wisepim.com/auth.md). The public REST API uses project API keys and supports its documented catalog operations; MCP uses separate OAuth project consent. Neither package installation nor this guide proves the matching service is deployed. Always spell the product name WISEPIM.

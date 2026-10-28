@@ -10,6 +10,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_REPOSITORY = "https://github.com/lldiegon/wisepim-skills"
 EXPECTED_SKILLS = {
+    'start-with-wisepim',
     'analyze-commerce-performance',
     'assess-product-images',
     'catalog-quality-audit',

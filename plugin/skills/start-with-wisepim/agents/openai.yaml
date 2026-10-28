@@ -1,0 +1,4 @@
+interface:
+  display_name: "Get started with WISEPIM"
+  short_description: "Create an account, connect an agent, and set up a catalog"
+  default_prompt: "Use $start-with-wisepim to help me create or connect my WISEPIM account and get my catalog set up."
