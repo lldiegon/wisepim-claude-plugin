@@ -2,7 +2,11 @@
   "mcpServers": {
     "wisepim": {
       "type": "http",
-      "url": "https://wisepim.com/mcp"
+      "url": "https://wisepim.com/mcp",
+      "oauth": {
+        "clientId": "wisepim-claude-code",
+        "callbackPort": 8765
+      }
     }
   }
 }

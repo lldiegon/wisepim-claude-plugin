@@ -177,6 +177,25 @@ class PackagingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "embedded headers"):
             validate(self.destination)
 
+    def test_native_oauth_config_preserves_the_predefined_public_client(self):
+        self.commit_source()
+        sync(self.source, self.destination)
+        path = self.destination / ".mcp.json"
+        config = json.loads(path.read_text())
+        validate(self.destination)
+        for invalid in (
+            {},
+            {"clientId": "unregistered", "callbackPort": 8765},
+            {"clientId": "wisepim-claude-code", "callbackPort": 8766},
+            {"clientId": "wisepim-claude-code", "callbackPort": 8765.0},
+            {"clientId": "wisepim-claude-code", "callbackPort": 8765, "clientSecret": "synthetic-denied"},
+        ):
+            with self.subTest(oauth=invalid):
+                config["mcpServers"]["wisepim"]["oauth"] = invalid
+                path.write_text(json.dumps(config))
+                with self.assertRaisesRegex(ValueError, "predefined Claude Code OAuth"):
+                    validate(self.destination)
+
     def test_private_planning_files_are_excluded_from_public_artifacts(self):
         self.commit_source()
         sync(self.source, self.destination)

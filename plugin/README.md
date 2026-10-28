@@ -20,7 +20,7 @@ This source package targets `https://wisepim.com/mcp`. The URL is a deployment
 contract, not evidence that the service is live or that this plugin has been
 approved by Anthropic. Live connection, OAuth, end-to-end workflow, and directory
 review must be verified before release.
-Version `0.2.2` includes seventeen skills for the matching 35-tool MCP service
+Version `0.2.3` includes seventeen skills for the matching 35-tool MCP service
 contract. Installing instructions alone does not connect an account.
 
 ## What you can do
@@ -65,10 +65,49 @@ claude --plugin-dir /absolute/path/to/wisepim-claude-plugin/plugin
 ```
 
 Authenticate to WISEPIM when Claude requests it and select the project for the
-connection. The hosted service requires a registered OAuth client. Directory
-setup uses **Use your own OAuth client**; a server-side client registration with
-the exact Claude callback is required. Automatic client registration is not
-currently implemented. There is no API key to paste into this package.
+connection. The service uses predefined OAuth clients with S256 PKCE; it does
+not automatically register clients or accept a pasted API key.
+
+### Claude Code
+
+The bundled remote server declares this public client configuration:
+
+```json
+"oauth": {
+  "clientId": "wisepim-claude-code",
+  "callbackPort": 8765
+}
+```
+
+Before it can connect, the service operator must register that client ID with
+exactly `http://localhost:8765/callback` as its redirect URI. It has no client
+secret; the selected project and permissions still require the user's consent.
+Only this registered callback is accepted, with no wildcard host, path or port.
+Keep port 8765 available while signing in. This loopback callback does not change
+the HTTPS MCP endpoint or issuer.
+
+For a direct connection without installing the bundle, the equivalent setup is:
+
+```sh
+claude mcp add --transport http --client-id wisepim-claude-code --callback-port 8765 wisepim https://wisepim.com/mcp
+```
+
+Then authenticate through `/mcp`. Use Claude Code 2.1.231 or later for the
+`localhost` callback form. Configuration in this repository does not create the
+server-side client or establish that it is deployed. See the official
+[preconfigured OAuth reference](https://code.claude.com/docs/en/mcp#use-pre-configured-oauth-credentials).
+
+### Hosted Claude apps
+
+The web, Desktop, mobile and Cowork connector uses a separate OAuth client and
+the exact redirect `https://claude.ai/api/mcp/auth_callback`. For a directory
+connector without automatic registration, the publisher configures an
+Anthropic-held confidential client through the developer portal's authentication
+settings. Its secret belongs only in secure service configuration and the
+portal, never this package. A custom connector can instead use **Use your own
+OAuth client**, with the actual client registered for that hosted callback.
+The Claude Code loopback client above is not the hosted connector's client.
+See [Claude connector authentication](https://claude.com/docs/connectors/building/authentication).
 
 Invoke a skill by name or describe your task. Availability depends on the installed Claude surface, deployed service and your account and connector permissions.
 

@@ -109,8 +109,15 @@ def validate(root=ROOT, preview=False, check_installable=True):
     if set(config) != {"mcpServers"} or set(config["mcpServers"]) != {"wisepim"}:
         raise ValueError("Exactly one declared WISEPIM destination is allowed")
     server = config["mcpServers"]["wisepim"]
-    if set(server) != {"type", "url"} or server["type"] != "http":
+    if set(server) != {"type", "url", "oauth"} or server["type"] != "http":
         raise ValueError("Remote OAuth-only HTTP transport required; no embedded headers or local execution")
+    oauth = server["oauth"]
+    if (
+        not isinstance(oauth, dict)
+        or oauth != {"clientId": "wisepim-claude-code", "callbackPort": 8765}
+        or type(oauth.get("callbackPort")) is not int
+    ):
+        raise ValueError("Expected predefined Claude Code OAuth client and fixed callback port; no secrets")
     url = urlsplit(server["url"])
     if url.scheme != "https" or url.netloc != "wisepim.com" or url.path != "/mcp" or url.query or url.fragment:
         raise ValueError("MCP URL must exactly match the frontend resource audience https://wisepim.com/mcp")
