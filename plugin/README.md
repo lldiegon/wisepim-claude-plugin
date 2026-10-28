@@ -20,7 +20,7 @@ This source package targets `https://wisepim.com/mcp`. The URL is a deployment
 contract, not evidence that the service is live or that this plugin has been
 approved by Anthropic. Live connection, OAuth, end-to-end workflow, and directory
 review must be verified before release.
-Version `0.2.3` includes seventeen skills for the matching 35-tool MCP service
+Version `0.2.4` includes seventeen skills for the matching 35-tool MCP service
 contract. Installing instructions alone does not connect an account.
 
 ## What you can do
@@ -50,7 +50,7 @@ project and product selection.
 
 Seventeen bundled skills cover guided account setup, catalog quality, product web research, research-backed native enrichment, translation, bulk text cleanup, commerce analysis, selected-product SEO evidence and opportunity planning, supplier documents, images, taxonomy, prompts/settings, channel issues and native improvement jobs. The [canonical skill library](https://github.com/lldiegon/wisepim-skills) describes each workflow.
 
-Research is evidence-only and requires its own execution permission. Findings do not automatically replace catalog fields or images. Stored supplier documents use supported bounded extraction; unsupported PDF/OCR and new file imports remain in their native workflows. Supplier jobs operate on already imported rows. Analytics reads persisted source evidence and reports mapping/coverage limits; it does not refresh providers or establish causal uplift.
+Research is evidence-only and requires its own execution permission. Findings do not automatically replace catalog fields or images. Stored supplier documents use supported bounded extraction; unsupported PDF/OCR and new file imports remain in their native workflows. Supplier jobs operate on already imported rows. Image workflows assess stored evidence and can retrieve existing images through supported native jobs; MCP does not generate images, video or audio. Analytics reads persisted source evidence and reports mapping/coverage limits; it does not refresh providers or establish causal uplift.
 
 Discover native job schemas and get a planning-only estimate before preparing a job. A catalog-job budget is an admission estimate ceiling, not a hard final-spend cap. Native job field policies and review gates remain authoritative after launch; the plugin does not expose arbitrary automation, bypass a gate or publish products. Track actual task/run receipts and reread saved products before claiming completion.
 

@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "repository": "https://github.com/lldiegon/wisepim-skills",
-  "commit": "6b5b6f9ecea17d90ba6eac0bb04e345e01fefe64",
+  "commit": "a0c6e35aa96b1b6f528d5c2925cb5d7989bd0ec3",
   "sourceDirty": false,
   "files": {
     "skills/analyze-commerce-performance/SKILL.md": "d882fd8099d811a01043a17f07ef69e216e1111ecc63a8073041c3b8db8e36c8",
     "skills/analyze-commerce-performance/agents/openai.yaml": "9f90987f5a0335bcb91cdbf37537221dc6495d2d313ba422496c073a791cd8d9",
-    "skills/assess-product-images/SKILL.md": "55e4a390d231e1a30a23d89132fcce6b3fb50e80271bf1e3fbd8cf7b67ef3e8b",
+    "skills/assess-product-images/SKILL.md": "30d2e63ba81a1007bbdea29d61bab1b263cda530e8cb0d480ec94f5b3fd2fd09",
     "skills/assess-product-images/agents/openai.yaml": "9f90987f5a0335bcb91cdbf37537221dc6495d2d313ba422496c073a791cd8d9",
     "skills/catalog-quality-audit/SKILL.md": "22c147ea7caffc8649dabbf8caeb28d4b45a35e4ab41d5e9e16f1ba7fe71e82f",
     "skills/catalog-quality-audit/agents/openai.yaml": "9f90987f5a0335bcb91cdbf37537221dc6495d2d313ba422496c073a791cd8d9",
