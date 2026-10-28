@@ -1,10 +1,14 @@
 # WISEPIM for Claude
 
-WISEPIM brings product information management (PIM) into Claude. Find missing
-product content, inspect catalog data quality, and prepare product enrichment and
-translations through your existing WISEPIM account. Compare product evidence with
-channel requirements you supply, then review proposed changes in WISEPIM before
-anything is applied.
+Manage your product catalog with WISEPIM, the AI-powered product information
+management (PIM) workspace. Start with guided account setup or connect an existing
+project. Find catalog gaps, research product facts, inspect supplier evidence,
+and prepare descriptions, translations and data cleanup using your saved
+WISEPIM settings.
+
+Analyze available commerce and search performance, review image and taxonomy
+issues, and prepare supported catalog improvement jobs. Review consequential
+changes in WISEPIM before execution, then check actual progress and saved results.
 
 The plugin connects to your authorized WISEPIM project and combines a remote MCP
 connection with seventeen reusable skills maintained in the
@@ -16,26 +20,35 @@ This source package targets `https://wisepim.com/mcp`. The URL is a deployment
 contract, not evidence that the service is live or that this plugin has been
 approved by Anthropic. Live connection, OAuth, end-to-end workflow, and directory
 review must be verified before release.
+Version `0.2.2` includes seventeen skills for the matching 35-tool MCP service
+contract. Installing instructions alone does not connect an account.
 
 ## What you can do
 
+- Create or resume a WISEPIM account and set up a first catalog with the native
+  signup and setup flow, before connecting any tools.
 - Review product catalog quality: identify missing content and prioritize gaps
   using current fields and stored quality scores from your connected project.
+- Research product facts and inspect saved source evidence, supplier documents,
+  images and taxonomy before proposing improvements.
 - Prepare native product data enrichment and ecommerce translation actions for
   explicit products, fields, and configured locales. Review the frozen selection,
   settings, and credit estimate before authorizing execution in WISEPIM.
+- Analyze persisted commerce and search evidence, with explicit date, store,
+  currency and coverage, to prioritize the selected products.
 - Review channel readiness: compare available product evidence with requirements
   you supply and explain missing or unverified information. The result is a gap
   review, not channel certification or automatic publishing.
 
-Examples: “Audit these ten products for missing descriptions”; “Prepare Dutch
-translations for these products”; “Check these products against these channel
-requirements.” Start with an explicit project and product selection.
+Examples: “Help me get my catalog set up”; “Research missing facts for these
+products”; “Prepare Dutch descriptions for my review”; “Use available search
+data to prioritize these products.” Start catalog operations with an explicit
+project and product selection.
 
 
 ## Catalog workflows
 
-Seventeen bundled skills cover catalog quality, product web research, research-backed native enrichment, translation, bulk text cleanup, commerce analysis, selected-product SEO evidence and opportunity planning, supplier documents, images, taxonomy, prompts/settings, channel issues and native improvement jobs. The [canonical skill library](https://github.com/lldiegon/wisepim-skills) describes each workflow.
+Seventeen bundled skills cover guided account setup, catalog quality, product web research, research-backed native enrichment, translation, bulk text cleanup, commerce analysis, selected-product SEO evidence and opportunity planning, supplier documents, images, taxonomy, prompts/settings, channel issues and native improvement jobs. The [canonical skill library](https://github.com/lldiegon/wisepim-skills) describes each workflow.
 
 Research is evidence-only and requires its own execution permission. Findings do not automatically replace catalog fields or images. Stored supplier documents use supported bounded extraction; unsupported PDF/OCR and new file imports remain in their native workflows. Supplier jobs operate on already imported rows. Analytics reads persisted source evidence and reports mapping/coverage limits; it does not refresh providers or establish causal uplift.
 
