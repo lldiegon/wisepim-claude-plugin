@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "wisepim": {
+      "type": "http",
+      "url": "https://wisepim.com/mcp"
+    }
+  }
+}

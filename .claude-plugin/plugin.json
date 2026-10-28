@@ -1,0 +1,20 @@
+{
+  "name": "wisepim",
+  "version": "0.1.0",
+  "description": "Audit product content, prepare translations, and review channel requirements with project-scoped WisePIM data and human approval for changes.",
+  "author": {
+    "name": "WisePIM",
+    "url": "https://wisepim.com"
+  },
+  "homepage": "https://wisepim.com",
+  "repository": "https://github.com/lldiegon/wisepim-claude-plugin",
+  "license": "MIT",
+  "keywords": [
+    "wisepim",
+    "catalog",
+    "ecommerce",
+    "product-content",
+    "translations"
+  ],
+  "mcpServers": "./.mcp.json"
+}
