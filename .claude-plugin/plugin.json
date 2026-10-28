@@ -16,5 +16,11 @@
     "product-content",
     "translations"
   ],
-  "mcpServers": "./.mcp.json"
+  "mcpServers": "./.mcp.json",
+  "icon": "./.claude-plugin/icon.png",
+  "privacyPolicyUrl": "https://wisepim.com/privacy",
+  "displayName": "WISEPIM",
+  "supportUrl": "https://wisepim.com/contact",
+  "documentationUrl": "https://github.com/lldiegon/wisepim-claude-plugin#readme",
+  "termsOfServiceUrl": "https://wisepim.com/terms"
 }

@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import struct
 import subprocess
 import sys
 import tempfile
@@ -64,6 +65,7 @@ class PackagingTests(unittest.TestCase):
             self.assertNotIn(".env", archive.namelist())
             self.assertFalse(any(name.startswith("scripts/") for name in archive.namelist()))
             self.assertIn(".claude-plugin/plugin.json", archive.namelist())
+            self.assertIn(".claude-plugin/icon.png", archive.namelist())
             self.assertEqual(len([name for name in archive.namelist() if name.endswith("SKILL.md")]), 3)
 
     def test_modified_or_extra_vendored_skill_fails(self):
@@ -120,6 +122,22 @@ class PackagingTests(unittest.TestCase):
         shutil.move(str(self.destination / ".claude-plugin"), self.destination / "hidden-manifest")
         (self.destination / ".claude-plugin").symlink_to("hidden-manifest", target_is_directory=True)
         with self.assertRaisesRegex(ValueError, "symlink"):
+            validate(self.destination)
+
+    def test_listing_icon_dimensions_and_privacy_policy_are_required(self):
+        self.commit_source()
+        sync(self.source, self.destination)
+        icon_path = self.destination / ".claude-plugin/icon.png"
+        original_icon = icon_path.read_bytes()
+        icon_path.write_bytes(original_icon[:16] + struct.pack(">II", 500, 500) + original_icon[24:])
+        with self.assertRaisesRegex(ValueError, "512 to 2048"):
+            validate(self.destination)
+        icon_path.write_bytes(original_icon)
+        manifest_path = self.destination / ".claude-plugin/plugin.json"
+        manifest = json.loads(manifest_path.read_text())
+        del manifest["privacyPolicyUrl"]
+        manifest_path.write_text(json.dumps(manifest))
+        with self.assertRaisesRegex(ValueError, "privacy policy URL"):
             validate(self.destination)
 
     def test_mcp_headers_or_destination_changes_refused(self):

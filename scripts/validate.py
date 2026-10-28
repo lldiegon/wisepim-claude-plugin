@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import struct
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +39,16 @@ def validate(root=ROOT, preview=False):
         raise ValueError("Expected a contained MCP configuration path")
     if manifest.get("license") != "MIT" or not (root / "LICENSE").is_file():
         raise ValueError("Public package needs its MIT license")
+    if manifest.get("privacyPolicyUrl") != "https://wisepim.com/privacy":
+        raise ValueError("Directory privacy policy URL is required")
+    if manifest.get("icon") != "./.claude-plugin/icon.png":
+        raise ValueError("Directory icon must be the bundled PNG")
+    icon = contained_file(root, ".claude-plugin/icon.png").read_bytes()
+    if len(icon) < 33 or icon[:8] != b"\x89PNG\r\n\x1a\n" or icon[12:16] != b"IHDR":
+        raise ValueError("Directory icon must be a PNG image")
+    width, height = struct.unpack(">II", icon[16:24])
+    if width != height or not 512 <= width <= 2048 or len(icon) >= 2_000_000:
+        raise ValueError("Directory icon must be square, 512 to 2048 pixels, and below 2 MB")
     config = json.loads((root / ".mcp.json").read_text())
     if set(config) != {"mcpServers"} or set(config["mcpServers"]) != {"wisepim"}:
         raise ValueError("Exactly one declared WisePIM destination is allowed")

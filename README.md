@@ -101,3 +101,6 @@ Report package issues in this repository without credentials or customer records
 WisePIM account and product information is available at [wisepim.com](https://wisepim.com).
 The package and bundled skills are MIT licensed; access to the hosted WisePIM
 service remains subject to the account's service agreement.
+
+The bundled 1024×1024 listing icon is rendered from the existing public
+[WisePIM brand SVG](https://wisepim.com/brand-assets/wisepim-logo.svg).

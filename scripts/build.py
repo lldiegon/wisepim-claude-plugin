@@ -7,7 +7,7 @@ from validate import ROOT, contained_file, validate
 
 def build(root=ROOT):
     validate(root)
-    names = [".claude-plugin/plugin.json", ".mcp.json", "LICENSE", "README.md", "skills.lock.json"]
+    names = [".claude-plugin/plugin.json", ".claude-plugin/icon.png", ".mcp.json", "LICENSE", "README.md", "skills.lock.json"]
     names.extend(path.relative_to(root).as_posix() for path in (root / "skills").rglob("*") if path.is_file())
     # README's relative documentation links remain usable in manual installs.
     names.extend(path.relative_to(root).as_posix() for path in (root / "submission").rglob("*.md"))
