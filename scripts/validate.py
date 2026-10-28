@@ -15,7 +15,6 @@ EXPECTED_SKILLS = {"catalog-quality-audit", "prepare-product-translations", "cha
 def payload_names(root):
     names = [".claude-plugin/plugin.json", ".claude-plugin/icon.png", ".mcp.json", "LICENSE", "README.md", "skills.lock.json"]
     names.extend(path.relative_to(root).as_posix() for path in (root / "skills").rglob("*") if path.is_file())
-    names.extend(path.relative_to(root).as_posix() for path in (root / "submission").rglob("*.md"))
     return sorted(names)
 
 
@@ -55,11 +54,23 @@ def validate_installable(root=ROOT):
     return len(actual)
 
 
+def has_private_review_metadata(value):
+    if isinstance(value, dict):
+        return bool({"review", "test_cases", "test_credentials", "reviewer_instructions"} & value.keys()) or any(
+            has_private_review_metadata(item) for item in value.values()
+        )
+    if isinstance(value, list):
+        return any(has_private_review_metadata(item) for item in value)
+    return False
+
+
 def validate(root=ROOT, preview=False, check_installable=True):
     root = root.resolve()
     for name in (".claude-plugin/plugin.json", ".mcp.json", "README.md", "LICENSE", "skills.lock.json"):
         contained_file(root, name)
     manifest = json.loads((root / ".claude-plugin/plugin.json").read_text())
+    if has_private_review_metadata(manifest):
+        raise ValueError("Public source must not contain private review metadata")
     if manifest.get("name") != "wisepim" or not re.fullmatch(r"\d+\.\d+\.\d+", manifest.get("version", "")):
         raise ValueError("Expected wisepim identity and explicit semantic version")
     if manifest.get("mcpServers") != "./.mcp.json":

@@ -5,3 +5,9 @@ __pycache__/
 .env.*
 !.env.example
 .DS_Store
+/submission/
+/plugin/submission/
+listing-strategy*
+*submission-plan*
+reviewer*
+review-metadata*.json

@@ -33,7 +33,7 @@ class PackagingTests(unittest.TestCase):
             (folder / "SKILL.md").write_text(f"---\nname: {name}\ndescription: Test workflow.\n---\nSynthetic data only.\n")
         self.destination = self.base / "plugin"
         self.destination.mkdir()
-        for name in (".claude-plugin", "submission"):
+        for name in (".claude-plugin",):
             shutil.copytree(REPO / name, self.destination / name)
         for name in (".mcp.json", "README.md", "LICENSE"):
             shutil.copyfile(REPO / name, self.destination / name)
@@ -66,7 +66,7 @@ class PackagingTests(unittest.TestCase):
             self.assertFalse(any(name.startswith("scripts/") for name in archive.namelist()))
             self.assertIn(".claude-plugin/plugin.json", archive.namelist())
             self.assertIn(".claude-plugin/icon.png", archive.namelist())
-            self.assertEqual(len([name for name in archive.namelist() if name.endswith("SKILL.md")]), 3)
+            self.assertEqual(len([name for name in archive.namelist() if name.endswith("SKILL.md")]), len(EXPECTED_SKILLS))
 
     def test_modified_or_extra_vendored_skill_fails(self):
         self.commit_source()
@@ -175,4 +175,28 @@ class PackagingTests(unittest.TestCase):
         config["mcpServers"]["wisepim"]["headers"] = {"Authorization": "synthetic"}
         (self.destination / ".mcp.json").write_text(json.dumps(config))
         with self.assertRaisesRegex(ValueError, "embedded headers"):
+            validate(self.destination)
+
+    def test_private_planning_files_are_excluded_from_public_artifacts(self):
+        self.commit_source()
+        sync(self.source, self.destination)
+        folder = self.destination / "submission"
+        folder.mkdir()
+        (folder / "plan.md").write_text("PRIVATE_SYNTHETIC_PLAN")
+        (self.destination / "listing-strategy.md").write_text("PRIVATE_SYNTHETIC_STRATEGY")
+        archive = build(self.destination)
+        with ZipFile(archive) as zipped:
+            self.assertFalse(any("submission" in name or "listing-strategy" in name for name in zipped.namelist()))
+            self.assertNotIn(b"PRIVATE_SYNTHETIC", b"".join(zipped.read(name) for name in zipped.namelist()))
+        self.assertFalse((self.destination / "plugin/submission").exists())
+        self.assertFalse((self.destination / "plugin/listing-strategy.md").exists())
+
+    def test_public_manifest_rejects_private_review_metadata(self):
+        self.commit_source()
+        sync(self.source, self.destination)
+        path = self.destination / ".claude-plugin/plugin.json"
+        manifest = json.loads(path.read_text())
+        manifest["review"] = {"test_cases": "Synthetic private overlay"}
+        path.write_text(json.dumps(manifest))
+        with self.assertRaisesRegex(ValueError, "Public source must not contain"):
             validate(self.destination)

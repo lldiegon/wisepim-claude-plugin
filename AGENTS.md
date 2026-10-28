@@ -11,6 +11,9 @@ reviewed source commit. Do not hand-edit copied `skills/` files or their lock.
 Use ordinary committed files, never submodules, Git LFS, or symlinks for runtime
 components. The Claude directory reads the generated, committed `plugin/` subfolder.
 Keep developer code, CI, and tests outside it. Do not hand-edit that output.
+Internal submission plans, keyword strategies, reviewer scenarios and private
+review metadata belong outside public source and history. Public packages include
+only runtime configuration, skills, licensing and genuine product/setup documentation.
 
 Before handing off a change, run:
 
@@ -26,4 +29,4 @@ Use Claude Code 2.1.281 or later for the newest MCP validation checks and report
 any older installed version explicitly. Local structure, source-integrity, and
 packaging checks do not prove live OAuth, tenant isolation in production, task
 completion, directory submission, approval, or publication. Keep those evidence
-scopes distinct. See `submission/README.md` for deployment and release gates.
+scopes distinct. Do not package internal planning or reviewer documents.

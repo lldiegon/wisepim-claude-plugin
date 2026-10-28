@@ -15,7 +15,7 @@ connection with three reusable skills maintained in the
 This source package targets `https://wisepim.com/mcp`. The URL is a deployment
 contract, not evidence that the service is live or that this plugin has been
 approved by Anthropic. Live connection, OAuth, end-to-end workflow, and directory
-review must pass the [submission checklist](submission/README.md) before release.
+review must be verified before release.
 
 ## What you can do
 
@@ -97,16 +97,16 @@ The sync command rejects a dirty source, symlinks, and unexpected file types.
 `python3 scripts/build.py` creates a deterministic, allowlisted ZIP under
 `dist/` for inspection or manual installation. Claude directory submission uses
 the committed generated `plugin/` folder. It contains only the manifest and icon,
-MCP configuration, skills and lock, license, README, and submission documents.
+MCP configuration, skills and lock, license, and README.
 Developer scripts, tests, agent instructions, and CI stay at the repository root
 and are excluded from the installed plugin. Do not hand-edit `plugin/`: the builder
 refreshes it and `--installable` validation enforces exact source parity. Commit
 the generated folder with each release; the directory does not build it for you.
 
 Use Claude Code 2.1.281 or later for the latest MCP manifest checks. Local
-validation is distinct from portal validation and live workflow tests. See
-[submission/README.md](submission/README.md) for the connector and plugin
-submission sequence and known deployment prerequisites.
+validation is distinct from platform validation and live workflow tests.
+Internal planning, keyword strategies and reviewer documents are not part of
+this public source or the installable package.
 
 ## Support and license
 
