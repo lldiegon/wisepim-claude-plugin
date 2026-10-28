@@ -1,0 +1,11 @@
+{
+  "formatVersion": 1,
+  "repository": "https://github.com/lldiegon/wisepim-skills",
+  "commit": "d692671a6ddd0ebb84990baed5e20177fb70bc79",
+  "sourceDirty": false,
+  "files": {
+    "skills/catalog-quality-audit/SKILL.md": "ae191044223b2ead05eee5df92e933c8dcfca5060ff5482df7f02c5f6d4c1ff2",
+    "skills/channel-readiness-review/SKILL.md": "91c93604e0ba4112bd072c5bf3cbbe5be85aca1c9c7656aef721aeef53f51939",
+    "skills/prepare-product-translations/SKILL.md": "60d5d2b554d1482dfe522576a9e1fd63c4af96edcc25f8b2d14cd0dbbe272e2a"
+  }
+}

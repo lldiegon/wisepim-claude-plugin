@@ -14,7 +14,7 @@ from zipfile import ZipFile
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 from sync_skills import collect, sync, EXPECTED_SKILLS
-from validate import validate
+from validate import validate, validate_installable
 from build import build
 
 REPO = SCRIPTS.parent
@@ -75,6 +75,34 @@ class PackagingTests(unittest.TestCase):
         skill.write_text(skill.read_text() + "Modified after sync\n")
         with self.assertRaisesRegex(ValueError, "differ from source lock"):
             validate(self.destination)
+
+    def test_generated_directory_contains_only_runtime_payload_and_exact_copies(self):
+        self.commit_source()
+        sync(self.source, self.destination)
+        build(self.destination)
+        generated = self.destination / "plugin"
+        validate_installable(self.destination)
+        self.assertFalse((generated / "scripts").exists())
+        self.assertFalse((generated / "tests").exists())
+        self.assertFalse((generated / ".github").exists())
+        self.assertFalse((generated / "AGENTS.md").exists())
+        (generated / "unexpected.py").write_text("Never execute developer code")
+        with self.assertRaisesRegex(ValueError, "payload differs"):
+            validate_installable(self.destination)
+        (generated / "unexpected.py").unlink()
+        (generated / "README.md").write_text("Stale generated document")
+        with self.assertRaisesRegex(ValueError, "payload differs"):
+            validate_installable(self.destination)
+
+    def test_symlinked_build_output_is_refused(self):
+        self.commit_source()
+        sync(self.source, self.destination)
+        outside = self.base / "output-target"
+        outside.mkdir()
+        (self.destination / "dist").symlink_to(outside, target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, "outputs must not be symlinks"):
+            build(self.destination)
+        self.assertEqual(list(outside.iterdir()), [])
 
     def test_symlink_source_refused_before_replacing_vendor(self):
         self.commit_source()

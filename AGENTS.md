@@ -9,7 +9,8 @@ Canonical skills live in `lldiegon/wisepim-skills`. Edit them in that repository
 then run `python3 scripts/sync_skills.py --source ../wisepim-skills` from a clean
 reviewed source commit. Do not hand-edit copied `skills/` files or their lock.
 Use ordinary committed files, never submodules, Git LFS, or symlinks for runtime
-components. The Claude directory reads the GitHub repository root.
+components. The Claude directory reads the generated, committed `plugin/` subfolder.
+Keep developer code, CI, and tests outside it. Do not hand-edit that output.
 
 Before handing off a change, run:
 
@@ -17,7 +18,8 @@ Before handing off a change, run:
 python3 -m unittest discover -s tests -v
 python3 scripts/validate.py
 python3 scripts/build.py
-claude plugin validate .
+python3 scripts/validate.py --installable
+claude plugin validate ./plugin
 git diff --check
 ```
 

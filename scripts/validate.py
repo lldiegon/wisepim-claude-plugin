@@ -12,6 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_SKILLS = {"catalog-quality-audit", "prepare-product-translations", "channel-readiness-review"}
 
 
+def payload_names(root):
+    names = [".claude-plugin/plugin.json", ".claude-plugin/icon.png", ".mcp.json", "LICENSE", "README.md", "skills.lock.json"]
+    names.extend(path.relative_to(root).as_posix() for path in (root / "skills").rglob("*") if path.is_file())
+    names.extend(path.relative_to(root).as_posix() for path in (root / "submission").rglob("*.md"))
+    return sorted(names)
+
+
 def contained_file(root, name):
     """Reject symlinked files and parents before opening distributable content."""
     base = root.resolve()
@@ -28,7 +35,27 @@ def contained_file(root, name):
     return path
 
 
-def validate(root=ROOT, preview=False):
+def validate_installable(root=ROOT):
+    """Require exact byte parity with the allowlisted runtime payload."""
+    generated = root / "plugin"
+    if generated.is_symlink() or not generated.is_dir():
+        raise ValueError("Generated plugin/ must be a real directory; run scripts/build.py")
+    expected = set(payload_names(root))
+    actual = set()
+    for path in generated.rglob("*"):
+        if path.is_symlink():
+            raise ValueError("Generated plugin/ must not contain symlinks")
+        if path.is_file():
+            name = path.relative_to(generated).as_posix()
+            actual.add(name)
+            if name not in expected or contained_file(generated, name).read_bytes() != contained_file(root, name).read_bytes():
+                raise ValueError(f"Generated plugin/ payload differs from its source: {name}")
+    if actual != expected:
+        raise ValueError("Generated plugin/ is incomplete; run scripts/build.py")
+    return len(actual)
+
+
+def validate(root=ROOT, preview=False, check_installable=True):
     root = root.resolve()
     for name in (".claude-plugin/plugin.json", ".mcp.json", "README.md", "LICENSE", "skills.lock.json"):
         contained_file(root, name)
@@ -87,15 +114,20 @@ def validate(root=ROOT, preview=False):
         raise ValueError("Unexpected runtime component requires explicit review")
     if len((root / "README.md").read_text().split()) < 40:
         raise ValueError("Directory README is too short")
+    if check_installable and (root / "plugin").exists():
+        validate_installable(root)
     return len(actual)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--preview", action="store_true")
+    parser.add_argument("--installable", action="store_true", help="Require the generated directory payload and exact parity")
     args = parser.parse_args()
     try:
         count = validate(preview=args.preview)
+        if args.installable:
+            validate_installable()
     except (OSError, ValueError, KeyError) as exc:
         parser.exit(1, f"Validation failed: {exc}\n")
     print(f"Package structure and {count} locked skill files validated; live OAuth and directory review are separate gates")

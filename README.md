@@ -29,7 +29,7 @@ requirements.” Start with an explicit project and product selection.
 Install through the directory after approval, or test a local checkout with:
 
 ```sh
-claude --plugin-dir /absolute/path/to/wisepim-claude-plugin
+claude --plugin-dir /absolute/path/to/wisepim-claude-plugin/plugin
 ```
 
 Authenticate to WisePIM when Claude requests it and select the project for the
@@ -79,7 +79,9 @@ Clone the skills repository beside this one, commit its reviewed changes, then:
 python3 scripts/sync_skills.py --source ../wisepim-skills
 python3 scripts/validate.py
 python3 -m unittest discover -s tests -v
-claude plugin validate .
+python3 scripts/build.py
+python3 scripts/validate.py --installable
+claude plugin validate ./plugin
 ```
 
 `skills.lock.json` pins the canonical Git revision and each copied file's SHA256.
@@ -87,8 +89,12 @@ The sync command rejects a dirty source, symlinks, and unexpected file types.
 `--allow-uncommitted` permits a local preview, which fails release validation.
 `python3 scripts/build.py` creates a deterministic, allowlisted ZIP under
 `dist/` for inspection or manual installation. Claude directory submission uses
-the committed GitHub repository root, including the generated skills and lock,
-not that ZIP. Tests and build tooling are not runtime entry points.
+the committed generated `plugin/` folder. It contains only the manifest and icon,
+MCP configuration, skills and lock, license, README, and submission documents.
+Developer scripts, tests, agent instructions, and CI stay at the repository root
+and are excluded from the installed plugin. Do not hand-edit `plugin/`: the builder
+refreshes it and `--installable` validation enforces exact source parity. Commit
+the generated folder with each release; the directory does not build it for you.
 
 Use Claude Code 2.1.281 or later for the latest MCP manifest checks. Local
 validation is distinct from portal validation and live workflow tests. See
