@@ -7,8 +7,7 @@ and prepare descriptions, translations and data cleanup using your saved
 WISEPIM settings.
 
 Analyze available commerce and search performance, review image and taxonomy
-issues, and prepare supported catalog improvement jobs. Review consequential
-changes in WISEPIM before execution, then check actual progress and saved results.
+issues, and prepare supported catalog improvement jobs. Use the configured approval policy, then check actual progress and saved results.
 
 The plugin connects to your authorized WISEPIM project and combines a remote MCP
 connection with seventeen reusable skills maintained in the
@@ -20,7 +19,7 @@ This source package targets `https://wisepim.com/mcp`. The URL is a deployment
 contract, not evidence that the service is live or that this plugin has been
 approved by Anthropic. Live connection, OAuth, end-to-end workflow, and directory
 review must be verified before release.
-Version `0.2.4` includes seventeen skills for the matching 35-tool MCP service
+Version `0.2.5` includes seventeen skills for the matching 35-tool MCP service
 contract. Installing instructions alone does not connect an account.
 
 ## What you can do
@@ -54,7 +53,7 @@ Research is evidence-only and requires its own execution permission. Findings do
 
 Discover native job schemas and get a planning-only estimate before preparing a job. A catalog-job budget is an admission estimate ceiling, not a hard final-spend cap. Native job field policies and review gates remain authoritative after launch; the plugin does not expose arbitrary automation, bypass a gate or publish products. Track actual task/run receipts and reread saved products before claiming completion.
 
-The expanded package uses explicit catalog, quality, task, settings, prompts and analytics reads; reviewed catalog/settings/prompt writes; and enrichment, research and catalog-job execution. Existing grants do not gain new scopes automatically. Reconnect and consent only to the operations needed for your account and workflows.
+The expanded package uses explicit catalog, quality, task, settings, prompts and analytics reads; catalog/settings/prompt writes under the configured approval policy; and enrichment, research and catalog-job execution. Existing grants do not gain new scopes automatically. Reconnect and consent only to the operations needed for your account and workflows.
 
 ## Connect and use
 
@@ -113,16 +112,7 @@ Invoke a skill by name or describe your task. Availability depends on the instal
 
 ## Changes and approval
 
-Reads and analysis use the connected project's permissions. Preparing a preview
-can create a stored change proposal, and AI actions can use account quota.
-A prepared proposal is not an applied change. Native translation previews describe
-the operation; they do not contain translations generated in advance. Open the
-WISEPIM `review_url`, inspect its exact scope, action parameters, credit estimate,
-and any supplied before/after values, and approve there if you want it
-applied. The assistant must never approve on your behalf, treat a chat message as
-server approval, or switch projects to complete an operation. An expired or stale
-proposal must be rebuilt and reviewed again. Verify completion by reading back
-persisted product data or the terminal task result.
+Reads and analysis use the connected project's permissions. A prepared proposal is not an applied change; native previews describe the selected operation and estimate, not content that has already been generated. New connections default to approval off. Requested actions can proceed from a durable preview without an extra browser confirmation. The account owner can enable required approval in WISEPIM connected apps settings. Enabled approval requires authenticated review of the exact proposal; the assistant cannot satisfy or disable that gate on the owner’s behalf. Project permissions, source checks, estimates and native job/field policies remain enforced in either mode. Expired or stale proposals require a fresh preview. Actual task receipts and saved products establish completion.
 
 ## Data handling
 
