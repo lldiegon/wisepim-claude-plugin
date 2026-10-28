@@ -1,9 +1,14 @@
 # WisePIM for Claude
 
-Connect your WisePIM catalog to Claude to inspect product content, prepare product
-translations, and review readiness against channel requirements you supply.
-The plugin combines a remote MCP connection with three reusable skills maintained
-in the [public WisePIM skills repository](https://github.com/lldiegon/wisepim-skills).
+WISEPIM brings product information management (PIM) into Claude. Find missing
+product content, inspect catalog data quality, and prepare product enrichment and
+translations through your existing WisePIM account. Compare product evidence with
+channel requirements you supply, then review proposed changes in WisePIM before
+anything is applied.
+
+The plugin connects to your authorized WisePIM project and combines a remote MCP
+connection with three reusable skills maintained in the
+[public WisePIM skills repository](https://github.com/lldiegon/wisepim-skills).
 
 ## Release status
 
@@ -14,11 +19,14 @@ review must pass the [submission checklist](submission/README.md) before release
 
 ## What you can do
 
-- Ask which products in your connected project need attention, with evidence
-  from their current fields and quality analysis.
-- Prepare translations for a named locale and a bounded product selection.
-- Compare current product data with explicitly supplied channel requirements.
-  This produces a gap review, not channel certification or automatic publishing.
+- Review product catalog quality: identify missing content and prioritize gaps
+  using current fields and stored quality scores from your connected project.
+- Prepare native product data enrichment and ecommerce translation actions for
+  explicit products, fields, and configured locales. Review the frozen selection,
+  settings, and credit estimate before authorizing execution in WisePIM.
+- Review channel readiness: compare available product evidence with requirements
+  you supply and explain missing or unverified information. The result is a gap
+  review, not channel certification or automatic publishing.
 
 Examples: “Audit these ten products for missing descriptions”; “Prepare Dutch
 translations for these products”; “Check these products against these channel

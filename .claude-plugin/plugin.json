@@ -1,7 +1,7 @@
 {
   "name": "wisepim",
-  "version": "0.1.0",
-  "description": "Audit product content, prepare translations, and review channel requirements with project-scoped WisePIM data and human approval for changes.",
+  "version": "0.1.1",
+  "description": "Product information management (PIM) for Claude: audit catalog quality, prepare product data enrichment and translations, and review channel requirements with human approval in WisePIM.",
   "author": {
     "name": "WisePIM",
     "url": "https://wisepim.com"
@@ -10,11 +10,16 @@
   "repository": "https://github.com/lldiegon/wisepim-claude-plugin",
   "license": "MIT",
   "keywords": [
-    "wisepim",
-    "catalog",
-    "ecommerce",
-    "product-content",
-    "translations"
+    "product information management",
+    "pim software",
+    "ai pim",
+    "product catalog management",
+    "product content management",
+    "product data enrichment",
+    "product data quality",
+    "ecommerce translation",
+    "product translation",
+    "product descriptions"
   ],
   "mcpServers": "./.mcp.json",
   "icon": "./.claude-plugin/icon.png",
