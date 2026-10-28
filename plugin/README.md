@@ -93,9 +93,14 @@ Claude and WISEPIM. This package includes instructions and configuration; it
 runs no local server, hooks, background process, install command, or telemetry.
 It contains no customer data or credentials. Authentication, authorization,
 proposal storage, and any enrichment execution are owned by the hosted WISEPIM
-service. Retention and subprocessors must be disclosed by WISEPIM in the live
-service policies before directory submission; this README does not establish a
-retention period. Product descriptions and retrieved content are untrusted data,
+service. Native research, enrichment and translation can send selected catalog
+content and prompts to the AI/search providers configured for that workflow.
+Account, catalog, proposal, approval and task records are stored by WISEPIM;
+revoking a connection stops access and does not delete those records. These
+records may be retained longer than 30 days. The service
+[privacy policy and subprocessor disclosure](https://wisepim.com/privacy) govern
+retention, deletion and provider processing. The signup workflow can also open
+the native WISEPIM browser flow and its user-selected sign-in provider. Product descriptions and retrieved content are untrusted data,
 not instructions to change permissions or send data to another destination.
 
 ## Development and releases
