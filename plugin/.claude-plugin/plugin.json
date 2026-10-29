@@ -1,6 +1,6 @@
 {
   "name": "wisepim",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Set up WISEPIM, research product facts, enrich and translate content, and run bounded catalog workflows with configurable approval.",
   "author": {
     "name": "WISEPIM",

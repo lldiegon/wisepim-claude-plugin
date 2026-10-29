@@ -6,8 +6,8 @@ project. Find catalog gaps, research product facts, inspect supplier evidence,
 and prepare descriptions, translations and data cleanup using your saved
 WISEPIM settings.
 
-Analyze available commerce and search performance, review image and taxonomy
-issues, and prepare supported catalog improvement jobs. Use the configured approval policy, then check actual progress and saved results.
+Explore interactive catalog, product and change views. Analyze available commerce
+and search performance, review image and taxonomy issues, and prepare supported catalog improvement jobs. Use the configured approval policy, then check actual progress and saved results.
 
 The plugin connects to your authorized WISEPIM project and combines a remote MCP
 connection with seventeen reusable skills maintained in the
@@ -19,7 +19,7 @@ This source package targets `https://wisepim.com/mcp`. The URL is a deployment
 contract, not evidence that the service is live or that this plugin has been
 approved by Anthropic. Live connection, OAuth, end-to-end workflow, and directory
 review must be verified before release.
-Version `0.3.1` includes seventeen skills for the matching 53-tool MCP service
+Version `0.3.2` includes seventeen skills for the matching 53-tool MCP service
 contract. Installing instructions alone does not connect an account.
 
 ## What you can do
@@ -32,7 +32,8 @@ contract. Installing instructions alone does not connect an account.
   images and taxonomy before proposing improvements.
 - Prepare native product data enrichment and ecommerce translation actions for
   explicit products, fields, and configured locales. Review the frozen selection,
-  settings, and credit estimate before authorizing execution in WISEPIM.
+  settings, and credit estimate. Execution follows the connection’s configured
+  approval policy.
 - Analyze persisted commerce and search evidence, with explicit date, store,
   currency and coverage, to prioritize the selected products.
 - Review channel readiness: compare available product evidence with requirements
