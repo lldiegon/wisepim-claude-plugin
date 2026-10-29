@@ -19,7 +19,7 @@ This source package targets `https://wisepim.com/mcp`. The URL is a deployment
 contract, not evidence that the service is live or that this plugin has been
 approved by Anthropic. Live connection, OAuth, end-to-end workflow, and directory
 review must be verified before release.
-Version `0.3.0` includes seventeen skills for the matching 53-tool MCP service
+Version `0.3.1` includes seventeen skills for the matching 53-tool MCP service
 contract. Installing instructions alone does not connect an account.
 
 ## What you can do
